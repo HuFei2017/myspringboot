@@ -1,0 +1,50 @@
+<assembly>
+    <id>assembly</id>
+    <baseDirectory>demo_1.0.0</baseDirectory>
+    <formats>
+        <!--打包类型-->
+        <format>tar.gz</format>
+    </formats>
+    <!--创建的归档文件会将其内容解压缩到当前目录-->
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <files>
+        <file>
+            <source>../bootstrap/target/Demo-1.0.0.jar.jar</source>
+            <outputDirectory>lib</outputDirectory>
+            <destName>Demo-1.0.0.jar</destName>
+        </file>
+    </files>
+
+    <fileSets>
+        <!--放置脚本-->
+        <fileSet>
+            <directory>../assembly/bin-jar</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>*.bat</include>
+                <include>*.sh</include>
+            </includes>
+        </fileSet>
+        <!--运行日志-->
+        <fileSet>
+            <directory>../assembly/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+            <excludes>
+                <exclude>.gitkeep</exclude>
+                <exclude>*/.gitkeep</exclude>
+            </excludes>
+        </fileSet>
+        <!--temp-->
+        <fileSet>
+            <directory>../assembly/temp</directory>
+            <outputDirectory>temp</outputDirectory>
+            <excludes>
+                <exclude>.gitkeep</exclude>
+                <exclude>*/.gitkeep</exclude>
+            </excludes>
+        </fileSet>
+
+    </fileSets>
+</assembly>

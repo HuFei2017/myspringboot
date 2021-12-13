@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.learning</groupId>
+        <artifactId>myspringboot</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>bootstrap</artifactId>
+    <version>1.0</version>
+    <name>bootstrap</name>
+    <description>the project bootstrap</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.learning</groupId>
+            <artifactId>cassandra</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--设定打包jar包中去除依赖-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <finalName>Demo-1.0.0.tar</finalName>
+                    <archive>
+                        <manifest>
+                            <!--是否创建Class-Path清单条目-->
+                            <addClasspath>true</addClasspath>
+                            <!--设置启动类-->
+                            <mainClass>com.learning.BootstrapApplication</mainClass>
+                        </manifest>
+                    </archive>
+                    <!--设置生成jar输出位置-->
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <!--打包可执行的jar包-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>Demo-1.0.0.jar</finalName>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

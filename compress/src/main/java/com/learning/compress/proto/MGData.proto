@@ -1,0 +1,22 @@
+syntax = "proto3";
+package proto;
+
+option java_package = "com.learning.compress.proto";
+option java_outer_classname = "MGDataProto";
+import "google/protobuf/any.proto";
+
+message MGDataProtoDefine{
+    string Id = 1;
+    string Addr = 2;
+    string ChannelId = 3;
+    string SignalName = 4;
+    string parameter = 5;
+    google.protobuf.Any StartTime = 6;
+    google.protobuf.Any EndTime = 7;
+    Detail Data = 10;
+}
+
+message Detail{
+    repeated int32 time = 1;
+    repeated float data = 2;
+}

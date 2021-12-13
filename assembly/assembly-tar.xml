@@ -1,0 +1,107 @@
+<assembly>
+    <id>assembly</id>
+    <!--主目录名称-->
+    <baseDirectory>demo_1.0.0</baseDirectory>
+    <formats>
+        <!--打包类型-->
+        <format>tar.gz</format>
+    </formats>
+    <!--压缩文件中包含一个主目录-->
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <files>
+        <file>
+            <source>../bootstrap/target/Demo-1.0.0.tar.jar</source>
+            <outputDirectory>lib</outputDirectory>
+            <destName>Demo-1.0.0.jar</destName>
+        </file>
+    </files>
+
+    <fileSets>
+        <!--网页资源-->
+        <fileSet>
+            <directory>../bootstrap/src/main/resources/static</directory>
+            <outputDirectory>static</outputDirectory>
+        </fileSet>
+        <!--配置文件-->
+        <fileSet>
+            <directory>../bootstrap/src/main/resources</directory>
+            <outputDirectory>config</outputDirectory>
+            <includes>
+                <include>*.properties</include>
+            </includes>
+        </fileSet>
+        <!--启动脚本-->
+        <fileSet>
+            <directory>../assembly/bin-tar</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>*.bat</include>
+                <include>*.sh</include>
+            </includes>
+        </fileSet>
+        <!--运行日志-->
+        <fileSet>
+            <directory>../assembly/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+            <excludes>
+                <exclude>.gitkeep</exclude>
+                <exclude>*/.gitkeep</exclude>
+            </excludes>
+        </fileSet>
+        <!--temp-->
+        <fileSet>
+            <directory>../assembly/temp</directory>
+            <outputDirectory>temp</outputDirectory>
+            <excludes>
+                <exclude>.gitkeep</exclude>
+                <exclude>*/.gitkeep</exclude>
+            </excludes>
+        </fileSet>
+
+    </fileSets>
+
+
+    <!--依赖打包-->
+    <dependencySets>
+        <dependencySet>
+            <!--是否进行解压缩-->
+            <unpack>false</unpack>
+            <!--是否包括项目构建期间生成的工件-->
+            <useProjectArtifact>true</useProjectArtifact>
+            <!--相对于根目录的输出目录-->
+            <outputDirectory>lib</outputDirectory>
+            <!--除去模块的jar包-->
+            <excludes>
+                <exclude>*:assembly:*</exclude>
+            </excludes>
+            <!--已提供依赖范围-->
+            <scope>provided</scope>
+        </dependencySet>
+
+        <dependencySet>
+            <unpack>false</unpack>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <excludes>
+                <exclude>*:assembly:*</exclude>
+            </excludes>
+            <!--系统依赖范围-->
+            <scope>system</scope>
+        </dependencySet>
+
+        <dependencySet>
+            <unpack>false</unpack>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <excludes>
+                <exclude>*:bootstrap:*</exclude>
+                <exclude>*:assembly:*</exclude>
+            </excludes>
+            <!--运行时依赖范围-->
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>
