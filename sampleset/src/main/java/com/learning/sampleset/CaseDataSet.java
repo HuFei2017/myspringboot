@@ -101,6 +101,7 @@ public class CaseDataSet {
     private int componentNum;
     @ColumnRule(type = "BOOL")
     private boolean hasFeedbackPaper;
+    @DateRule
     @ColumnRule(type = "TIMESTAMP")
     private String createTime;
 
@@ -110,7 +111,7 @@ public class CaseDataSet {
     private String stateMonitoringDateTime;
     @DateRule
     @ColumnRule(type = "TIMESTAMP")
-    private String stateConfirmationDatetime;
+    private String stateConfirmationDateTime;
     @DateRule
     @ColumnRule(type = "TIMESTAMP")
     private String overHaultTime;
@@ -120,7 +121,6 @@ public class CaseDataSet {
     private int steady;
     @ColumnRule(type = "VARCHAR", length = 255)
     private String relatedPoints;
-    @TextRule(maxLength = 255)
     @ColumnRule(type = "VARCHAR", length = 255)
     private String majorPoint;
     @DateRule
