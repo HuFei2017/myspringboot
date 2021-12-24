@@ -5,23 +5,25 @@ import com.learning.enums.DataSourceTableOrderType;
 import java.lang.annotation.*;
 
 /**
- * @ClassName DateRule
+ * @ClassName TableRule
  * @Description TODO
  * @Author hufei
- * @Date 2021/11/29 14:56
+ * @Date 2021/12/24 11:10
  * @Version 1.0
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.SOURCE)
 @Documented
-public @interface ColumnRule {
-    boolean key() default false;
-
-    String primitiveType() default "";
-
+public @interface TableRule {
     int length() default -1;
+
+    String defaultValue() default "";
+
+    boolean require() default true;
+
+    boolean key() default false;
 
     DataSourceTableOrderType orderType() default DataSourceTableOrderType.None;
 
-    boolean require() default true;
+    String primitiveType() default "";
 }

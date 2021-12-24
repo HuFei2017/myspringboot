@@ -19,15 +19,15 @@ import lombok.Data;
 @DataSourceRule(namespace = "Cassandra:Keyspace:TsDataTable")
 public class TsDataSource {
     @PropertyRestrictRule(unique = true)
-    @ColumnRule(key = true, type = "UUID")
+    @ColumnRule(key = true, primitiveType = "UUID")
     private String tsId;
     @PropertyRestrictRule(unique = true)
-    @ColumnRule(type = "INT")
+    @ColumnRule(primitiveType = "INT")
     private int dataType;
-    @ColumnRule(type = "BLOB")
+    @ColumnRule(primitiveType = "BLOB")
     private Long[] datas;
-    @ColumnRule(type = "BIGINT")
+    @ColumnRule(primitiveType = "BIGINT")
     private long measDate;
-    @ColumnRule(type = "BIGINT")
+    @ColumnRule(primitiveType = "BIGINT")
     private int timeBase;
 }

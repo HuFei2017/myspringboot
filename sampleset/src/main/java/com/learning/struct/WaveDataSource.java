@@ -19,45 +19,45 @@ import lombok.Data;
 public class WaveDataSource {
     //波形ID
     @PropertyRestrictRule(unique = true)
-    @ColumnRule(key = true, type = "UUID")
+    @ColumnRule(key = true, primitiveType = "UUID")
     private String wid;
     //波形采集时间
-    @ColumnRule(type = "BIGINT")
+    @ColumnRule(primitiveType = "BIGINT")
     private long measDate;
     //波形总值
-    @ColumnRule(type = "FLOAT")
+    @ColumnRule(primitiveType = "FLOAT")
     private float measValue;
     //转换系数
-    @ColumnRule(type = "FLOAT")
+    @ColumnRule(primitiveType = "FLOAT")
     private float convertCoef;
     //采集频率
-    @ColumnRule(type = "FLOAT")
+    @ColumnRule(primitiveType = "FLOAT")
     private float samplingRate;
     //原始频率
-    @ColumnRule(type = "FLOAT")
+    @ColumnRule(primitiveType = "FLOAT")
     private float sourceRate;
     //波形长度
-    @ColumnRule(type = "INT")
+    @ColumnRule(primitiveType = "INT")
     private int dataLen;
     //转速
-    @ColumnRule(type = "FLOAT")
+    @ColumnRule(primitiveType = "FLOAT")
     private float runSpeed;
     //波形横轴单位
-    @ColumnRule(type = "TEXT")
+    @ColumnRule(primitiveType = "TEXT")
     private String xUnit;
     //波形纵轴单位
-    @ColumnRule(type = "TEXT")
+    @ColumnRule(primitiveType = "TEXT")
     private String yUnit;
     //时标ID
-    @ColumnRule(type = "UUID")
+    @ColumnRule(primitiveType = "UUID")
     private String tsId;
     //时标数据路由
     @DataSourceRefTypeRule(namespace = "Cassandra:Keyspace:TsDataTable", type = DataSourceType.Cassandra)
     @TableDataSourceRefConfigRule(key = "tsId")
-    @ColumnRule(type = "UUID")
+    @ColumnRule(primitiveType = "UUID")
     private String tsPath;
     //时标偏移量
-    @ColumnRule(type = "INT")
+    @ColumnRule(primitiveType = "INT")
     private int tsOffset;
     //波形数据路由
 //    @DataSourceRefTypeRule(namespace = "Http:RDFS", type = DataSourceType.Http)

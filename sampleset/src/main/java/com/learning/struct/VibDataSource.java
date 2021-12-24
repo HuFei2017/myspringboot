@@ -22,30 +22,30 @@ import java.util.Map;
 public class VibDataSource {
     //趋势序号
     @PropertyRestrictRule(unique = true)
-    @ColumnRule(key = true, type = "UUID")
+    @ColumnRule(key = true, primitiveType = "UUID")
     private String id;
     //趋势名称
-    @ColumnRule(type = "TEXT")
+    @ColumnRule(primitiveType = "TEXT")
     private String name;
     //趋势时间轴
-    @ColumnRule(type = "BLOB")
+    @ColumnRule(primitiveType = "BLOB")
     private Long[] x;
     //时间单位
-    @ColumnRule(type = "TEXT")
+    @ColumnRule(primitiveType = "TEXT")
     private String xUnit;
     //趋势数值轴
-    @ColumnRule(type = "BLOB")
+    @ColumnRule(primitiveType = "BLOB")
     private Float[] y;
     //数值单位
-    @ColumnRule(type = "TEXT")
+    @ColumnRule(primitiveType = "TEXT")
     private String yUnit;
     //波形 resourcePath 集合
-    @ColumnRule(type = "BLOB")
+    @ColumnRule(primitiveType = "BLOB")
     private String[] extra;
     //每个点的备注说明
-    @ColumnRule(type = "BLOB")
+    @ColumnRule(primitiveType = "BLOB")
     private Map[] comment;
     //趋势属性信息
-    @ColumnRule(type = "BLOB")
+    @ColumnRule(primitiveType = "BLOB")
     private Map props;
 }
