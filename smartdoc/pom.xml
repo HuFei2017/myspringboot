@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.learning</groupId>
+        <artifactId>myspringboot</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>smartdoc</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>smartdoc</name>
+    <description>Smart Doc To Generate Rest API</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.shalousun</groupId>
+            <artifactId>smart-doc</artifactId>
+            <version>2.3.6</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--plugin模板-->
+            <!--            <plugin>-->
+            <!--                <groupId>com.github.shalousun</groupId>-->
+            <!--                <artifactId>smart-doc-maven-plugin</artifactId>-->
+            <!--                <version>2.3.6</version>-->
+            <!--                <configuration>-->
+            <!--                    &lt;!&ndash;指定生成文档的使用的配置文件,配置文件放在自己的项目中&ndash;&gt;-->
+            <!--                    <configFile>./src/main/resources/smart-doc.json</configFile>-->
+            <!--                    &lt;!&ndash;指定项目名称&ndash;&gt;-->
+            <!--                    <projectName>测试</projectName>-->
+            <!--                    &lt;!&ndash;smart-doc实现自动分析依赖树加载第三方依赖的源码，如果一些框架依赖库加载不到导致报错，这时请使用excludes排除掉&ndash;&gt;-->
+            <!--                    <excludes>-->
+            <!--                        &lt;!&ndash;格式为：groupId:artifactId;参考如下&ndash;&gt;-->
+            <!--                        &lt;!&ndash;也可以支持正则式如：com.alibaba:.* &ndash;&gt;-->
+            <!--                        <exclude>com.alibaba:fastjson</exclude>-->
+            <!--                    </excludes>-->
+            <!--                    &lt;!&ndash;includes配置用于配置加载外部依赖源码,配置后插件会按照配置项加载外部源代码而不是自动加载所有，因此使用时需要注意&ndash;&gt;-->
+            <!--                    &lt;!&ndash;smart-doc能自动分析依赖树加载所有依赖源码，原则上会影响文档构建效率，因此你可以使用includes来让插件加载你配置的组件&ndash;&gt;-->
+            <!--                    <includes>-->
+            <!--                        &lt;!&ndash;格式为：groupId:artifactId;参考如下&ndash;&gt;-->
+            <!--                        &lt;!&ndash;也可以支持正则式如：com.alibaba:.* &ndash;&gt;-->
+            <!--                        <include>com.alibaba:fastjson</include>-->
+            <!--                    </includes>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        &lt;!&ndash;如果不需要在执行编译时启动smart-doc，则将phase注释掉&ndash;&gt;-->
+            <!--                        <phase>compile</phase>-->
+            <!--                        <goals>-->
+            <!--                            &lt;!&ndash;smart-doc提供了html、openapi、markdown等goal，可按需配置&ndash;&gt;-->
+            <!--                            <goal>html</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>com.github.shalousun</groupId>
+                <artifactId>smart-doc-maven-plugin</artifactId>
+                <version>2.3.6</version>
+                <configuration>
+                    <!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
+                    <configFile>./src/main/resources/smart-doc.json</configFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
