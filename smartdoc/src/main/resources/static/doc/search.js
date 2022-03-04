@@ -18,6 +18,12 @@ api[0].list[0].list.push({
     url: 'http://localhost:8080/test',
     desc: 'XX方法',
 });
+api[0].list[0].list.push({
+    order: '2',
+    deprecated: 'false',
+    url: 'http://localhost:8080/test2',
+    desc: 'XX方法2',
+});
 document.onkeydown = keyDownSearch;
 function keyDownSearch(e) {
     const theEvent = e;
