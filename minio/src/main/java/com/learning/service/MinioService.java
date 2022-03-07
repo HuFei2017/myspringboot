@@ -1,10 +1,15 @@
 package com.learning.service;
 
+import com.learning.configuration.MinioConfiguration;
+import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 /**
@@ -18,39 +23,63 @@ import java.io.InputStream;
 public class MinioService {
 
     private MinioClient minioClient = null;
+    private final MinioConfiguration configuration;
+    private final Logger log = LoggerFactory.getLogger(MinioService.class);
 
-    public String addDevlevelData(byte[] data) {
+    MinioService(MinioConfiguration configuration) {
+        this.configuration = configuration;
+        getClient();
+    }
+
+    void uploadFileToMinio(byte[] data, String filePath) {
 
         MinioClient client = getClient();
 
         if (null != client) {
             try (InputStream in = new ByteArrayInputStream(data)) {
-                System.out.println("开始传输文件：" + System.currentTimeMillis());
+                long start = System.currentTimeMillis();
                 minioClient.putObject(PutObjectArgs.builder()
-                                .bucket("matlab-data")
-                                .object("test/devlevel/try")
-                                .stream(in, in.available(), -1)
-//                                .stream(in, -1, 10485760)
-                                .contentType("text/plain")
-                                .build()
+                        .bucket(configuration.getBucketName())
+                        .object(filePath)
+                        .stream(in, in.available(), -1)
+                        .contentType("text/plain")
+                        .build()
                 );
-                System.out.println("传输文件完成：" + System.currentTimeMillis());
+                long end = System.currentTimeMillis();
+                log.info("文件传输耗时：" + (end - start) + "ms");
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
+    }
 
-        return "";
+    byte[] getByteContent(String filepath) {
+        try (InputStream in = minioClient.getObject(
+                GetObjectArgs.builder()
+                        .bucket(configuration.getBucketName())
+                        .object(filepath)
+                        .build()
+        );
+             ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+            int bsize;
+            while ((bsize = in.read()) != -1) {
+                os.write(bsize);
+            }
+            return os.toByteArray();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return new byte[0];
     }
 
     private MinioClient getClient() {
         if (null == minioClient) {
-            this.minioClient = MinioClient.builder()
-//                    .endpoint("http://172.16.0.78:9006/")
-                    .endpoint("http://127.0.0.1:9000/")
-//                    .credentials("minio", "minio123")
-                    .credentials("minioadmin", "minioadmin")
-                    .build();
+            if (null != configuration) {
+                this.minioClient = MinioClient.builder()
+                        .endpoint(configuration.getPoint())
+                        .credentials(configuration.getAccessKey(), configuration.getSecretKey())
+                        .build();
+            }
         }
         return minioClient;
     }
