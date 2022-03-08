@@ -21,6 +21,11 @@ public class MainController {
         this.service = service;
     }
 
+    @PostMapping("/test")
+    public String test(@RequestBody byte[] data) {
+        return "file length：" + data.length;
+    }
+
     /**
      * @Description 设备级数据上传
      * @Return java.lang.String
