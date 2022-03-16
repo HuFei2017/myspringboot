@@ -36,6 +36,7 @@
         <module>multithread</module>
         <module>sampleset</module>
         <module>smartdoc</module>
+        <module>springdemo</module>
         <module>unittest</module>
         <module>consul-config</module>
         <module>consul-server1</module>

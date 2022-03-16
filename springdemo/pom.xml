@@ -8,14 +8,10 @@
         <version>2.4.5</version>
     </parent>
     <groupId>com.learning</groupId>
-    <artifactId>minio</artifactId>
+    <artifactId>springdemo</artifactId>
     <version>1.0</version>
-    <name>minio</name>
-    <description>Minio Demo</description>
-
-    <properties>
-        <okhttp3.version>4.8.1</okhttp3.version>
-    </properties>
+    <name>springdemo</name>
+    <description>Demo project for Spring Boot</description>
 
     <dependencies>
         <dependency>
@@ -27,29 +23,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.4.5</version>
-        </dependency>
-        <!--lombok依赖包-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
-        </dependency>
-        <!-- Minio依赖 -->
-        <dependency>
-            <groupId>io.minio</groupId>
-            <artifactId>minio</artifactId>
-            <version>8.3.0</version>
-        </dependency>
-        <!-- ES依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-            <version>2.4.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-elasticsearch</artifactId>
-            <version>4.2.3</version>
         </dependency>
     </dependencies>
 
