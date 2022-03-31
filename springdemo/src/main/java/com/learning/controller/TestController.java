@@ -1,12 +1,11 @@
 package com.learning.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.io.FileUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -39,5 +38,13 @@ public class TestController {
         return "success";
     }
 
+    @GetMapping("/test5")
+    public byte[] test5(@RequestParam("path") String path) throws IOException {
+        File file = new File(path);
+        if (file.exists() && file.isFile()) {
+            return FileUtils.readFileToByteArray(file);
+        }
+        return new byte[0];
+    }
 
 }
