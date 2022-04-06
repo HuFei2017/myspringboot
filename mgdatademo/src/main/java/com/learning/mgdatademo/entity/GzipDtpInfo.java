@@ -11,8 +11,8 @@ import lombok.Data;
  */
 @Data
 public class GzipDtpInfo {
-    private String startTime = "2021-10-01 01:33:33";
-    private String endTime = "2021-11-10 01:33:36";
+    private String startTime;
+    private String endTime;
     private String path;
     private String dfsPath;
 }

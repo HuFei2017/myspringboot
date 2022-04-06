@@ -11,8 +11,8 @@ import lombok.Data;
  */
 @Data
 public class TagInfo {
-    private String id = "d7847278-96ef-4818-816e-f8d5236a2b38";
-    private String name = "L_RU_ODG_INT08";
+    private String id;
+    private String name;
     private String reName;
     private String unit;
     private String property;
