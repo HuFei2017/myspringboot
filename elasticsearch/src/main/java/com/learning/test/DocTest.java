@@ -14,6 +14,10 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
+import org.elasticsearch.script.Script;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
@@ -57,7 +61,11 @@ public class DocTest {
 
 //        deleteDoc(indexName, "ef9ba5b1-77e6-4e62-914f-3c1a79bb20d4");
 
-        multiDeleteDoc(indexName);
+//        multiDeleteDoc(indexName);
+
+        SearchResponse response = groupDoc(indexName);
+        Terms aa = response.getAggregations().get("agg");
+        System.out.println();
     }
 
     private static void addDoc(String indexName, Map<String, Object> value) throws IOException {
@@ -124,6 +132,26 @@ public class DocTest {
         searchSourceBuilder.from(0);
         searchSourceBuilder.size(10);
         searchSourceBuilder.timeout(TimeValue.timeValueSeconds(5));
+        searchRequest.source(searchSourceBuilder);
+        return client.search(searchRequest, RequestOptions.DEFAULT);
+    }
+
+    private static SearchResponse groupDoc(String indexName) throws IOException {
+        RestHighLevelClient client = RestClient.initRestClient();
+        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+//        searchSourceBuilder.query(QueryBuilders.boolQuery().must(QueryBuilders.termQuery("column1", "a1")));
+        searchSourceBuilder.fetchSource(new String[]{"column1", "column3"}, new String[0]);
+        TermsAggregationBuilder aggregation = AggregationBuilders.terms("agg").script(
+                new Script("doc['column1']+'_'+doc['column3']")
+        ).size(10000);
+        searchSourceBuilder.aggregation(aggregation);
+
+        searchSourceBuilder.from(0);
+        searchSourceBuilder.size(10);
+        searchSourceBuilder.timeout(TimeValue.timeValueSeconds(5));
+        searchSourceBuilder.fetchSource(false);
         searchRequest.source(searchSourceBuilder);
         return client.search(searchRequest, RequestOptions.DEFAULT);
     }
